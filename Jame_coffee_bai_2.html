@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jame's Coffee</title>
+</head>
+<body>
+    <h2>Jame's coffee</h2>
+<div class="container-fluid">
+    <div class="container">
+        <div class="part1">
+            <fieldset>
+                <legend>Personal Information</legend>
+                Full Name:<input type="text" id="name"> <br/>
+
+                Your Email:<input type="text" id="email">
+            </fieldset>
+        </div>
+        <div class="part2">
+            <fieldset>
+                <legend>Your Orders</legend>
+                Espresso ($.10):<input type="text" id="Espresso"> <br/>
+                Cappuccino ($.12):<input type="text" id="Cappuccino"><br/>
+                House espresso ($.7):<input type="text" id="House_espresso"><br/>
+                Chocolace duscing ($.7):<input type="text" id="Chocolace_duscing"><br/>
+                Single origin ($.8):<input type="text" id="Single_origin"><br/>
+                Cold milk ($.4):<input type="text" id="Cold_milk"><br/>
+                Marshmallows ($.3):<input type="text" id="Marshmallows"><br/>
+                Size:<select  onchange="validateSelectBox(this)">
+				    <option value="Small">Small</option>
+				    <option value="Medium">Medium</option>
+				    <option value="Large">Large</option>
+				</select>
+            </fieldset>
+        </div>
+    </div>
+    <div class="container">
+        <fieldset>
+            <legend>Your Bill</legend>
+            <h3>Your Name:<span id="name2"></span></h3>
+            <h3>Email: <span id="email2"></span></h3>
+            <table border="1" >
+                <thead>
+                    <tr><th>Menu</th><th>Price</th><th>Quantity</th><th>Amout</th><th>Size</th></tr>
+                	<tr>
+                		<th></th><th></th><th></th><th></th>
+                		<th><div id="result"></div></th>
+                    </tr>
+                </thead>
+                <tbody id="bill">
+                    <!-- <tr><td>Smosa</td><td>Rs. 10</td><td>1</td><td>10x1 = 10</td></tr> -->
+                </tbody>
+            </table>
+            </fieldset>
+            <h1>Total Amout: $. <span id="amount">0</span></h1>
+    </div>
+</div>
+<script type="text/javascript">
+	function validateSelectBox(obj)
+{
+    // Lấy danh sách các options
+    var options = obj.children;
+ 
+    // Biến lưu trữ các chuyên mục đa chọn
+    var html = '';
+ 
+    // lặp qua từng option và kiểm tra thuộc tính selected
+    for (var i = 0; i < options.length; i++){
+        if (options[i].selected){
+            html += options[i].value;
+        }
+    }
+ 
+    // Gán kết quả vào div#result
+    document.getElementById('result').innerHTML = html;
+}
+</script>
+<script>
+
+var Espresso = 10, Cappuccino = 12, House_espresso = 7, Chocolace_duscing = 7,Single_origin =8,Cold_milk=4,Marshmallows=3;
+var Espresso_q=0, Cappuccino_q=0, vadapav_q=0, Chocolace_duscing_q=0,Single_origin_q=0,Cold_milk_q =0,Marshmallows_q=0;
+var name = "", email="";
+var EspressoBill="",CappuccinoBill="",House_espressoBill="",Chocolace_duscingBill="",Single_originBill="";
+var total_amount=0;
+document.getElementById("name").addEventListener("keyup",function(){
+    // name = document.getElementById("name").value;
+    
+    document.getElementById("name2").innerHTML=this.value;
+});
+
+document.getElementById("email").addEventListener("keyup",function(){
+    // name = document.getElementById("name").value;
+    
+    document.getElementById("email2").innerHTML=this.value;
+});
+
+
+
+document.getElementById("Espresso").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    EspressoBill="";
+    Espresso_q=0;
+    showBill();
+}else{
+    Espresso_q=this.value;
+    EspressoBill="<tr><td>Espresso</td><td>$. "+Espresso+"</td><td>"+Espresso_q+"</td><td>"+Espresso+"x"+Espresso_q+" = "+Espresso*Espresso_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("Cappuccino").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    CappuccinoBill="";
+    Cappuccino_q=0;
+    showBill();
+
+}else{
+    Cappuccino_q=this.value;
+    CappuccinoBill="<tr><td>Cappuccino</td><td>$. "+Cappuccino+"</td><td>"+Cappuccino_q+"</td><td>"+Cappuccino+"x"+Cappuccino_q+" = "+Cappuccino*Cappuccino_q+"</td></tr>";
+    showBill();
+}
+});
+
+document.getElementById("House_espresso").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    House_espressoBill="";
+    House_espresso_q=0;
+    showBill();
+
+}else{
+    House_espresso_q=this.value;
+    House_espressoBill="<tr><td>House_espresso</td><td>$. "+House_espresso+"</td><td>"+House_espresso_q+"</td><td>"+House_espresso+"x"+House_espresso_q+" = "+House_espresso*House_espresso_q+"</td></tr>";
+    showBill();
+}
+});
+
+document.getElementById("Chocolace_duscing").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+   Chocolace_duscingBill="";
+    Chocolace_duscing_q=0;
+    showBill();
+
+}else{
+    Chocolace_duscing_q=this.value;
+    Chocolace_duscingBill="<tr><td>MaggChocolace_duscingi</td><td>$. "+Chocolace_duscing+"</td><td>"+Chocolace_duscing_q+"</td><td>"+Chocolace_duscing+"x"+Chocolace_duscing_q+" = "+Chocolace_duscing*Chocolace_duscing_q+"</td></tr>";
+    showBill();
+}
+});
+
+document.getElementById("Cold_milk").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    Cold_milkBill="";
+    Cold_milk_q=0;
+    showBill();
+}else{
+    Cold_milk_q=this.value;
+    Cold_milkBill="<tr><td>Cold_milk</td><td>$. "+Cold_milk+"</td><td>"+Cold_milk_q+"</td><td>"+Cold_milk+"x"+Cold_milk_q+" = "+Cold_milk*Cold_milk_q+"</td></tr>";
+    showBill();
+
+}
+});
+document.getElementById("Single_origin").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    Single_originBill="";
+    Single_origin_q=0;
+    showBill();
+}else{
+    Single_origin_q=this.value;
+    Single_originBill="<tr><td>Single_origin</td><td>$. "+Single_origin+"</td><td>"+Single_origin_q+"</td><td>"+Single_origin+"x"+Single_origin_q+" = "+Single_origin*Single_origin_q+"</td></tr>";
+    showBill();
+
+}
+});
+document.getElementById("Marshmallows").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    MarshmallowsBill="";
+    Marshmallows_q=0;
+    showBill();
+}else{
+    Marshmallows_q=this.value;
+    MarshmallowsBill="<tr><td>Marshmallows</td><td>$. "+Marshmallows+"</td><td>"+Marshmallows_q+"</td><td>"+Marshmallows+"x"+Marshmallows_q+" = "+Marshmallows*Marshmallows_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+
+function showBill(){
+    document.getElementById("bill").innerHTML=EspressoBill+CappuccinoBill+House_espressoBill+Chocolace_duscingBill+Cold_milkBill+Single_originBill+MarshmallowsBill; //table statement
+    document.getElementById("amount").innerHTML = Espresso*Espresso_q+Cappuccino*Cappuccino_q+House_espresso*House_espresso_q+Chocolace_duscing*Chocolace_duscing_q+Cold_milk*Cold_milk_q+Single_origin*Single_origin_q+Marshmallows*Marshmallows_q; // total amount
+}
+// select
+
+</script>
+</body>
+</html>
